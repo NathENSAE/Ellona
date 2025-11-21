@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Protected Page 1</h1>
+
+  <script>
+    const PASSWORD = "1234"; // change this
+
+    const input = prompt("Enter password:");
+
+    if (input !== PASSWORD) {
+      alert("Incorrect password!");
+      window.location.href = "index.html"; 
+    }
+  </script>
+</body>
+</html>
