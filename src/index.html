@@ -1,11 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellona Gallery</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="index.css">
+</head>
 <body>
-  <h1>Home</h1>
 
-  <img src="/img1.png" alt="img1" width="200"><br><br>
+  <header>
+    <h1>Ellona</h1>
+    <div class="nav-links">
+      <a href="protected1.html">Eléa</a>
+      <a href="protected2.html">Loris</a>
+    </div>
+  </header>
 
-  <a href="protected1.html">Eléa</a><br>
-  <a href="protected2.html">Loris</a>
+  <div class="container">
+    
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper" id="gallery-wrapper">
+        </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+    <div class="hint">Tip: Tap a photo to delete it.</div>
+
+    <div class="controls">
+      <label for="fileInput" class="custom-file-upload">Choose Photo</label>
+      <input type="file" id="fileInput" accept="image/*">
+      <button id="uploadBtn">Upload</button>
+      <p id="statusText" style="width: 100%; text-align: center; margin: 5px 0 0 0; font-size: 0.8em; color: #888;"></p>
+    </div>
+
+  </div>
+
+  <script type="module" src="index.js"></script>
+
 </body>
 </html>

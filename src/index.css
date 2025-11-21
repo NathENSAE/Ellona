@@ -1,0 +1,127 @@
+/* --- CSS STYLES --- */
+:root {
+    --primary-color: #6c5ce7;
+    --danger-color: #ff7675; /* Red for delete */
+    --bg-color: #f8f9fa;
+    --text-color: #2d3436;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    background: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    z-index: 10;
+}
+
+h1 { margin: 0; font-size: 1.5rem; }
+
+.nav-links { margin-top: 10px; }
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin: 0 10px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- GALLERY STYLES --- */
+.swiper {
+    width: 100%;
+    height: 60vh; 
+    max-height: 700px;
+    min-height: 300px;
+    background-color: #000;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    position: relative;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    cursor: pointer; /* Shows hand icon to indicate clickability */
+    transition: opacity 0.3s;
+}
+
+.swiper-slide img:hover {
+    opacity: 0.9; /* Slight fade on hover to hint interaction */
+}
+
+/* Controls */
+.controls {
+    margin-top: 20px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+input[type="file"] { display: none; }
+
+.custom-file-upload {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+button#uploadBtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+button#uploadBtn:disabled { opacity: 0.6; }
+
+/* Small hint text under gallery */
+.hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+}
