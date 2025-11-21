@@ -5,72 +5,7 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const CLOUD_NAME = "due68cbih";
 const UPLOAD_PRESET = "ellona";
 
-let swiperInstance = null; 
-
-async function loadGallery() {
-    console.log("Loading gallery...");
-    const { data, error } = await supabaseClient
-    .from("photos")
-    .select("*")
-    .order("id", { ascending: false });
-
-    if (error) return console.error(error);
-
-    const wrapper = document.getElementById("gallery-wrapper");
-    wrapper.innerHTML = "";
-
-    data.forEach(photo => {
-    const slide = document.createElement("div");
-    slide.className = "swiper-slide";
-    
-    const img = document.createElement("img");
-    img.src = photo.url;
-    // Store the Supabase ID inside the HTML element so we can read it later
-    img.dataset.id = photo.id; 
-    img.alt = "Photo";
-    
-    slide.appendChild(img);
-    wrapper.appendChild(slide);
-    });
-
-    initSwiper();
-}
-
-function initSwiper() {
-    if (swiperInstance !== null) swiperInstance.destroy(true, true);
-
-    swiperInstance = new Swiper(".mySwiper", {
-    spaceBetween: 0,
-    centeredSlides: true,
-    loop: true,
-    autoplay: {
-        delay: 4000,
-        disableOnInteraction: false, // Continues auto-swiping after interaction
-    },
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    // Events listener
-    on: {
-        click: function(swiper, event) {
-        // Check if the clicked item is an image
-        const clickedElement = event.target;
-        if (clickedElement.tagName === 'IMG') {
-            // Get the ID we stored earlier
-            const photoId = clickedElement.dataset.id;
-            if (photoId) {
-            handleDelete(photoId);
-            }
-        }
-        }
-    }
-    });
-}
+let currentPhotoId = null; // Tracks which photo is open in lightbox
 
 // --- NEW DELETE FUNCTION ---
 async function handleDelete(id) {
@@ -135,14 +70,82 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
     }
 });
 
-// Gallery Button Logic
-document.getElementById("galleryBtn").addEventListener("click", () => {
-    window.location.href = "gallery.html";
-});
-
 document.getElementById("fileInput").addEventListener("change", function() {
     const fileName = this.files[0]?.name;
     if(fileName) document.getElementById("statusText").innerText = fileName;
 });
+
+// --- LOAD GALLERY ---
+async function loadGallery() {
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Loading...</p>';
+
+    const { data, error } = await supabaseClient
+    .from("photos")
+    .select("*")
+    .order("id", { ascending: false });
+
+    if (error) {
+    console.error(error);
+    return;
+    }
+
+    gallery.innerHTML = ""; // Clear loading text
+
+    data.forEach(photo => {
+    // Create grid item container
+    const item = document.createElement("div");
+    item.className = "gallery-item";
+    
+    // Create image
+    const img = document.createElement("img");
+    img.src = photo.url;
+    img.alt = "Gallery Photo";
+    img.loading = "lazy";
+
+    // Add Click Event to Open Lightbox
+    item.addEventListener("click", () => {
+        openLightbox(photo.url, photo.id);
+    });
+
+    item.appendChild(img);
+    gallery.appendChild(item);
+    });
+}
+
+// --- LIGHTBOX FUNCTIONS ---
+function openLightbox(url, id) {
+    const lightbox = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lightbox-img");
+    
+    // Set content
+    lbImg.src = url;
+    currentPhotoId = id; // Remember this ID in case user clicks Delete
+
+    // Show
+    lightbox.style.display = "flex";
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+    currentPhotoId = null;
+}
+
+// Close lightbox if clicking on the dark background (but not the image)
+document.getElementById("lightbox").addEventListener("click", (e) => {
+    if (e.target.id === "lightbox") {
+        closeLightbox();
+    }
+});
+
+document.getElementById("lb-delete-btn").addEventListener("click", () => {
+    if (currentPhotoId !== null) {
+        handleDelete(currentPhotoId);
+        closeLightbox();
+    }
+});
+
+document.getElementById("lb-close-btn").addEventListener("click", closeLightbox);
+document.getElementById("lb-close-btn-2").addEventListener("click", closeLightbox);
 
 loadGallery();

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellona Gallery</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <header>
+    <a href="index.html" style="text-decoration:none; color:inherit;">
+        <h1 style="margin:0;">Ellona</h1>
+    </a>
+    <div class="nav-links">
+      <a href="protected1.html">Eléa</a>
+      <a href="protected2.html">Loris</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <div class="upload-bar">
+      <input type="file" id="fileInput" accept="image/*">
+      <button id="uploadBtn">Upload New Photo</button>
+      <span id="statusText" style="margin-left:10px; color:#888; align-self:center;"></span>
+    </div>
+
+    <div id="gallery" class="gallery-grid">
+      </div>
+
+  </div>
+
+  <div id="lightbox">
+    <span class="close-x" id="lb-close-btn">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged">
+    
+    <div class="lightbox-controls">
+      <button class="lb-btn" id="lb-close-btn-2">Close</button>
+      <button class="lb-btn delete-btn" id="lb-delete-btn">Delete Photo</button>
+    </div>
+  </div>
+
+  <script type="module" src="gallery.js"></script>
+
+</body>
+</html>
