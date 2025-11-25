@@ -1,3 +1,13 @@
+const PASSWORD = ["elea", "éléa", "eléa"];
+
+const input = prompt("Enter password:");
+const normalized = input ? input.trim().toLowerCase() : '';
+
+if (!PASSWORD.includes(normalized)) {
+    alert("Incorrect password!");
+    window.location.href = "index.html"; 
+}
+
 // --- STEP 1: DEFINE YOUR LETTERS HERE ---
 // Instead of "content", we use "filename" which points to your .txt file
 const letters = [
