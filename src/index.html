@@ -18,8 +18,8 @@
   <header>
     <h1>Souvenirs d'antan</h1>
     <div class="nav-links">
-      <a href="elea.html">Éléa</a>
-      <a href="loris.html">Loris</a>
+      <a href="#" onclick="eleaScript()">Éléa</a>
+      <a href="#" onclick="lorisScript()">Loris</a>
     </div>
   </header>
 
@@ -44,6 +44,53 @@
 
   </div>
 
+  <script>
+    function eleaScript() {
+      // Check local storage for validation
+      const isValidated = localStorage.getItem('eleaValidated');
+      if (isValidated && isValidated === 'true') {
+          window.location.href = "elea.html";
+          return;
+      }
+      
+      const PASSWORD = ["elea", "éléa", "eléa"];
+
+      const input = prompt("Enter password:");
+      const normalized = input ? input.trim().toLowerCase() : '';
+
+      if (!PASSWORD.includes(normalized)) {
+          alert("Incorrect password!");
+          window.location.href = "index.html"; 
+      }
+      else {
+          localStorage.setItem('eleaValidated', 'true');
+          window.location.href = "elea.html";
+      }
+    }
+    function lorisScript() {
+      // Check local storage for validation
+      const isValidated = localStorage.getItem('lorisValidated');
+      if (isValidated && isValidated === 'true') {
+          window.location.href = "loris.html";
+          return;
+      }
+
+      const PASSWORD = ["loris"];
+
+      const input = prompt("Enter password:");
+      const normalized = input ? input.trim().toLowerCase() : '';
+
+      if (!PASSWORD.includes(normalized)) {
+          alert("Incorrect password!");
+          window.location.href = "index.html"; 
+      }
+      else {
+          localStorage.setItem('lorisValidated', 'true');
+          window.location.href = "loris.html";
+      }
+    }
+      
+  </script>
   <script type="module" src="index.js"></script>
 
 </body>

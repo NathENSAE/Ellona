@@ -42,5 +42,16 @@
 
   <script type="module" src="elea.js"></script>
 
+  <script>
+    // Check the localStorage for validation
+    document.addEventListener('DOMContentLoaded', () => {
+        const isValidated = localStorage.getItem('eleaValidated');
+        if (!isValidated || isValidated !== 'true') {
+            alert("Access denied! Redirecting to home page.");
+            window.location.href = "index.html";
+        }
+    });
+  </script>
+
 </body>
 </html>
