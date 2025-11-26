@@ -257,11 +257,12 @@ button:hover {
     &::after {
         content: '';
         position: absolute;
-        top: -1px;
-        transform: translateX(-50%) rotate(90deg);
-        width: 10px;
-        height: 15px;
-        background: linear-gradient(90deg, rgba(255, 60, 112, 0.8), rgba(255, 60, 112, 0));
+        top: 5px;
+        left: 110%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 10px;
+        background: linear-gradient(90deg, rgba(201, 249, 29, 0.8), rgba(255, 60, 112, 0));
         border-radius: 50%;
         opacity: 0.9;
         filter: blur(2px);
