@@ -6,6 +6,8 @@
   <title>Ellona Gallery</title>
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
@@ -14,12 +16,12 @@
 <body>
 
   <header>
-    <a href="index.html" style="text-decoration:none; color:inherit;">
-        <h1 style="margin:0;">Ellona</h1>
-    </a>
+    <h1 style="margin:0;">Gallerie</h1>
+
     <div class="nav-links">
+      <a href="index.html">Home</a>
       <a href="elea.html">Eléa</a>
-      <a href="protected2.html">Loris</a>
+      <a href="loris.html">Loris</a>
     </div>
   </header>
 
@@ -29,6 +31,7 @@
       <input type="file" id="fileInput" accept="image/*">
       <button id="uploadBtn">Upload New Photo</button>
       <span id="statusText" style="margin-left:10px; color:#888; align-self:center;"></span>
+      <div class="hint">Astuce : On peut réorganiser les photos en les faisant glisser</div>
     </div>
 
     <div id="gallery" class="gallery-grid"></div>

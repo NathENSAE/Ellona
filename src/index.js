@@ -9,10 +9,11 @@ let swiperInstance = null;
 
 async function loadGallery() {
     console.log("Loading gallery...");
+    // Order by 'position' first, so the custom order is respected
     const { data, error } = await supabaseClient
     .from("photos")
     .select("*")
-    .order("id", { ascending: false });
+    .order("position", { ascending: true });
 
     if (error) return console.error(error);
 
