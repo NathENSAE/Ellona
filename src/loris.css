@@ -40,6 +40,13 @@ header p {
     color: var(--secondary-color);
 }
 
+header a.home-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--secondary-color);
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+
 main {
     display: flex;
     justify-content: center;
