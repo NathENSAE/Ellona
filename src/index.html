@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ellona Gallery</title>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
+
+
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
 
   <header>
@@ -24,10 +28,10 @@
   </header>
 
   <div class="container">
-    
+
     <div class="swiper mySwiper">
       <div class="swiper-wrapper" id="gallery-wrapper">
-        </div>
+      </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
@@ -49,30 +53,30 @@
       // Check local storage for validation
       const isValidated = localStorage.getItem('eleaValidated');
       if (isValidated && isValidated === 'true') {
-          window.location.href = "elea.html";
-          return;
+        window.location.href = "elea.html";
+        return;
       }
-      
+
       const PASSWORD = ["elea", "éléa", "eléa"];
 
       const input = prompt("Enter password:");
       const normalized = input ? input.trim().toLowerCase() : '';
 
       if (!PASSWORD.includes(normalized)) {
-          alert("Incorrect password!");
-          window.location.href = "index.html"; 
+        alert("Incorrect password!");
+        window.location.href = "index.html";
       }
       else {
-          localStorage.setItem('eleaValidated', 'true');
-          window.location.href = "elea.html";
+        localStorage.setItem('eleaValidated', 'true');
+        window.location.href = "elea.html";
       }
     }
     function lorisScript() {
       // Check local storage for validation
       const isValidated = localStorage.getItem('lorisValidated');
       if (isValidated && isValidated === 'true') {
-          window.location.href = "loris.html";
-          return;
+        window.location.href = "loris.html";
+        return;
       }
 
       const PASSWORD = ["loris"];
@@ -81,17 +85,18 @@
       const normalized = input ? input.trim().toLowerCase() : '';
 
       if (!PASSWORD.includes(normalized)) {
-          alert("Incorrect password!");
-          window.location.href = "index.html"; 
+        alert("Incorrect password!");
+        window.location.href = "index.html";
       }
       else {
-          localStorage.setItem('lorisValidated', 'true');
-          window.location.href = "loris.html";
+        localStorage.setItem('lorisValidated', 'true');
+        window.location.href = "loris.html";
       }
     }
-      
+
   </script>
   <script type="module" src="index.js"></script>
 
 </body>
+
 </html>
