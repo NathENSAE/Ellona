@@ -10,17 +10,30 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ellona";
-mongoose.connect(MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(err => console.error("MongoDB connection error:", err));
+const MONGODB_URI = process.env.MONGODB_URI;
+
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) return;
+  try {
+    await mongoose.connect(MONGODB_URI);
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+  }
+};
+
+// Middleware to ensure DB connection for API routes
+app.use('/api', async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 // Photo Schema
 const photoSchema = new mongoose.Schema({
   url: { type: String, required: true },
   position: { type: Number, default: 0 }
 });
-const Photo = mongoose.model("Photo", photoSchema);
+const Photo = mongoose.models.Photo || mongoose.model("Photo", photoSchema);
 
 app.use(express.json()); // Essential for parsing JSON bodies
 app.use(express.static(path.join(__dirname, "/public")));
@@ -47,7 +60,7 @@ app.post('/api/photos', async (req, res) => {
     // Get the current max position to place it at the end
     const lastPhoto = await Photo.findOne().sort({ position: -1 });
     const nextPosition = lastPhoto ? lastPhoto.position + 1 : 0;
-    
+
     const newPhoto = new Photo({ url, position: nextPosition });
     await newPhoto.save();
     res.json(newPhoto);
@@ -82,10 +95,10 @@ app.delete('/api/photos/:id', async (req, res) => {
 // 🌟 NEW ENDPOINT FOR NEWSAPI 🌟
 app.get('/api/news', async (req, res) => {
   console.log('Received request for /api/news');
-  const topic = req.query.topic || 'cars, crypto, anime, tft'; 
+  const topic = req.query.topic || 'cars, crypto, anime, tft';
   const encodedTopic = encodeURIComponent(topic);
   const url = `https://newsapi.org/v2/everything?q=${encodedTopic}&sortBy=publishedAt&pageSize=5&language=fr&apiKey=${NEWS_API_KEY}`;
-  
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -105,6 +118,10 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "src", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Site démarré sur http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Site démarré sur http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
