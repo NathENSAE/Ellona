@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellona Gallery</title>
+  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <header>
+    <h1 style="margin:0;">Gallerie</h1>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <div class="upload-bar">
+      <input type="file" id="fileInput" accept="image/*">
+      <button id="uploadBtn">Ajouer Une Photo</button>
+      <span id="statusText" style="margin-left:10px; color:#888; align-self:center;"></span>
+      <div class="hint">Astuce : On peut réorganiser les photos en les faisant glisser</div>
+    </div>
+
+    <div id="gallery" class="gallery-grid"></div>
+
+  </div>
+
+  <div id="lightbox">
+    <span class="close-x" id="lb-close-btn">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged">
+    
+    <div class="lightbox-controls">
+      <button class="lb-btn" id="lb-close-btn-2">Close</button>
+      <button class="lb-btn delete-btn" id="lb-delete-btn">Delete Photo</button>
+    </div>
+  </div>
+
+  <script type="module" src="gallery.js"></script>
+
+</body>
+</html>
